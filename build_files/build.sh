@@ -4,15 +4,6 @@ set -ouex pipefail
 
 IMAGE_VARIANT="${IMAGE_VARIANT:-main}"
 
-### [IM]MUTABLE /opt
-## On bootc images /opt is a symlink to /var/opt, and anything written there at
-## build time is not deployed. Several third-party RPMs (e.g. Chromium-based
-## browsers) install into /opt, so make it a real, image-owned directory.
-if [[ -L /opt ]]; then
-    rm /opt
-    mkdir /opt
-fi
-
 # Copy the contents of system_files/ of the git repo to /
 cp -avf "/ctx/system_files"/. /
 

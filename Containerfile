@@ -14,6 +14,11 @@ FROM ${BASE_IMAGE}
 
 ARG IMAGE_VARIANT=main
 
+### [IM]MUTABLE /opt
+## On bootc images /opt is a symlink to /var/opt, so packages installing there
+## would be lost. helium-bin installs to /opt/helium, so make /opt immutable.
+RUN rm /opt && mkdir /opt
+
 ### MODIFICATIONS
 ## Shared changes live in build_files/shared/*.sh, per-variant changes in
 ## build_files/variants/<IMAGE_VARIANT>.sh. build.sh runs them in order.
