@@ -1,0 +1,5 @@
+# Installed for the desktop user after login by aurora-base-image-brew.service
+brew "atuin"
+brew "jq"
+brew "age"
+brew "scrcpy"

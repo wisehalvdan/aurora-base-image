@@ -1,0 +1,12 @@
+[Unit]
+Description=Install Homebrew packages from the image Brewfile
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/libexec/aurora-base-image-brew
+Restart=on-failure
+RestartSec=5min
+
+[Install]
+WantedBy=default.target
