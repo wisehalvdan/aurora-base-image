@@ -1,4 +1,4 @@
-# Installed for the desktop user after login by aurora-base-image-brew.service
+# Install after first login: brew bundle --file=/usr/share/aurora-base-image/Brewfile
 brew "atuin"
 brew "jq"
 brew "age"

@@ -17,9 +17,13 @@ Shared changes go in `build_files/shared/`, per-machine changes in `build_files/
 sudo usermod -aG wireshark "$USER"
 ```
 
-If `usermod` says the group doesn't exist, copy it from the image first: `grep '^wireshark:' /usr/lib/group | sudo tee -a /etc/group`
+**Flatpaks** listed in `system_files/usr/share/flatpak/preinstall.d/` install on first boot.
 
-**Preinstalled apps:** Flatpaks from `system_files/usr/share/flatpak/preinstall.d/` install on first boot. Homebrew formulae from `system_files/usr/share/aurora-base-image/Brewfile` install after your first login (check with `journalctl --user -u aurora-base-image-brew`).
+**Homebrew packages** listed in `system_files/usr/share/aurora-base-image/Brewfile` are installed once, after first login:
+
+```bash
+brew bundle --file=/usr/share/aurora-base-image/Brewfile
+```
 
 ---
 
