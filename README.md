@@ -1,4 +1,33 @@
-# image-template
+# aurora-base-image
+
+Personal Aurora DX images, built from one Containerfile:
+
+| Image | Machine | Base |
+|---|---|---|
+| `ghcr.io/wisehalvdan/aurora-base-image` | Dell laptop (Intel) | `aurora-dx:stable` |
+| `ghcr.io/wisehalvdan/aurora-base-image-nvidia` | Desktop (RTX 3090) | `aurora-dx-nvidia-open:stable` |
+
+Shared changes go in `build_files/shared/`, per-machine changes in `build_files/variants/`, config files in `system_files/`.
+
+## Per-machine setup after install
+
+**Wireshark capture without root:** add yourself to the `wireshark` group, then log out and back in:
+
+```bash
+sudo usermod -aG wireshark "$USER"
+```
+
+**Flatpaks** listed in `system_files/usr/share/flatpak/preinstall.d/` install on first boot.
+
+**Homebrew packages** listed in `system_files/usr/share/aurora-base-image/Brewfile` are installed once, after first login:
+
+```bash
+brew bundle --file=/usr/share/aurora-base-image/Brewfile
+```
+
+---
+
+# Template documentation
 
 This repository is meant to be a template for building your own custom [bootc](https://github.com/bootc-dev/bootc) image. This template is the recommended way to make customizations to any image published by the Universal Blue Project.
 

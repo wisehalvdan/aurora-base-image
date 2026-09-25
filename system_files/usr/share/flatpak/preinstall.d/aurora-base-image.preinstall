@@ -1,0 +1,43 @@
+# Installed from Flathub on first boot (same mechanism Aurora uses for Bazaar)
+[Flatpak Preinstall com.bitwarden.desktop]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.telegram.desktop]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.blender.Blender]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.bambulab.BambuStudio]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.openscad.OpenSCAD]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall com.moonlight_stream.Moonlight]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.dbeaver.DBeaverCommunity]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall net.werwolv.ImHex]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall org.gnome.meld]
+Branch=stable
+IsRuntime=false
+
+[Flatpak Preinstall io.github.pwr_solaar.solaar]
+Branch=stable
+IsRuntime=false
+[Flatpak Preinstall com.rustdesk.RustDesk]
+Branch=stable
+IsRuntime=false
