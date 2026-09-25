@@ -38,3 +38,6 @@ IsRuntime=false
 [Flatpak Preinstall io.github.pwr_solaar.solaar]
 Branch=stable
 IsRuntime=false
+[Flatpak Preinstall com.rustdesk.RustDesk]
+Branch=stable
+IsRuntime=false

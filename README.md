@@ -11,8 +11,6 @@ Shared changes go in `build_files/shared/`, per-machine changes in `build_files/
 
 ## Per-machine setup after install
 
-**RustDesk incoming connections:** `sudo systemctl enable --now rustdesk`
-
 **Wireshark capture without root:** add yourself to the `wireshark` group, then log out and back in:
 
 ```bash
