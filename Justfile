@@ -99,6 +99,13 @@ build $target_image=image_name $tag=default_tag:
     set -euox pipefail
 
     BUILD_ARGS=()
+    # Set by the CI matrix (or your shell) to pick which machine image to build
+    if [[ -n "${BASE_IMAGE:-}" ]]; then
+        BUILD_ARGS+=("--build-arg" "BASE_IMAGE=${BASE_IMAGE}")
+    fi
+    if [[ -n "${IMAGE_VARIANT:-}" ]]; then
+        BUILD_ARGS+=("--build-arg" "IMAGE_VARIANT=${IMAGE_VARIANT}")
+    fi
     LABELS=()
     if [[ -z "$(git status -s)" ]]; then
         GIT_SHA=$(git rev-parse --short HEAD)
