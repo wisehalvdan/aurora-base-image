@@ -13,6 +13,16 @@ Shared changes go in `build_files/shared/`, per-machine changes in `build_files/
 
 **RustDesk incoming connections:** `sudo systemctl enable --now rustdesk`
 
+**Wireshark capture without root:** add yourself to the `wireshark` group, then log out and back in:
+
+```bash
+sudo usermod -aG wireshark "$USER"
+```
+
+If `usermod` says the group doesn't exist, copy it from the image first: `grep '^wireshark:' /usr/lib/group | sudo tee -a /etc/group`
+
+**Preinstalled apps:** Flatpaks from `system_files/usr/share/flatpak/preinstall.d/` install on first boot. Homebrew formulae from `system_files/usr/share/aurora-base-image/Brewfile` install after your first login (check with `journalctl --user -u aurora-base-image-brew`).
+
 ---
 
 # Template documentation
