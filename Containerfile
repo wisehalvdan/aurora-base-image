@@ -1,3 +1,6 @@
+# Must be declared before the first FROM to be usable in a FROM line
+ARG BASE_IMAGE=ghcr.io/ublue-os/aurora-dx:stable
+
 # Allow build scripts to be referenced without being copied into the final image
 FROM scratch AS ctx
 COPY build_files /
@@ -9,7 +12,6 @@ COPY system_files /system_files
 #   - Intel laptop (no dGPU): ghcr.io/ublue-os/aurora-dx:stable              (IMAGE_VARIANT=main)
 #   - RTX 3090 desktop:       ghcr.io/ublue-os/aurora-dx-nvidia-open:stable  (IMAGE_VARIANT=nvidia)
 # Universal Blue Images: https://github.com/orgs/ublue-os/packages
-ARG BASE_IMAGE=ghcr.io/ublue-os/aurora-dx:stable
 FROM ${BASE_IMAGE}
 
 ARG IMAGE_VARIANT=main
