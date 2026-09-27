@@ -99,6 +99,8 @@ build $target_image=image_name $tag=default_tag:
     set -euox pipefail
 
     BUILD_ARGS=()
+    # Refresh remote packages/nightly assets even when the base image is unchanged.
+    BUILD_ARGS+=("--build-arg" "IMAGE_BUILD_NONCE=$(date -u +%Y%m%dT%H%M%S)-${RANDOM}")
     # Set by the CI matrix (or your shell) to pick which machine image to build
     if [[ -n "${BASE_IMAGE:-}" ]]; then
         BUILD_ARGS+=("--build-arg" "BASE_IMAGE=${BASE_IMAGE}")

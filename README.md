@@ -9,6 +9,42 @@ Personal Aurora DX images, built from one Containerfile:
 
 Shared changes go in `build_files/shared/`, per-machine changes in `build_files/variants/`, config files in `system_files/`.
 
+## RustDesk unattended Wayland access
+
+Both images include the latest upstream RustDesk unattended Wayland preview and
+its private DRM capture library. The root `rustdesk-drm.service` starts at boot;
+open RustDesk to configure your server and unattended-access credentials per
+machine. No credentials are included in the image.
+
+This is the binary from the [official preview](https://rustdesk.com/blog/unattended-remote-access-wayland/),
+repackaged into the image, not a Fedora RPM or a source build. The September 27,
+2026 asset was tested on Aurora 44 with an RTX 3090: desktop access and access
+at the Plasma Login Manager after reboot both worked. Intel hardware remains
+untested. `build_files/shared/60-rustdesk.sh` selects the newest uploaded
+unattended-Wayland x86_64 Debian asset from the nightly release and verifies its
+published SHA-256. The selected asset metadata is saved in the image at
+`/usr/share/aurora-base-image/rustdesk-nightly-asset.json`.
+
+Each `just build` refreshes this selection, including builds run by CI. When
+calling `podman build` directly, use `--no-cache` or a fresh
+`--build-arg IMAGE_BUILD_NONCE=...`. RustDesk updates arrive with image updates;
+it does not replace itself on the running system. New nightlies can introduce
+regressions beyond what the build's library and service checks can detect.
+
+### Moving from the temporary system extension
+
+On the desktop used for testing, remove the extension **before booting this image**
+so its older files and `/etc` service do not override the image installation.
+From a local terminal or SSH (this stops RustDesk until the new image boots):
+
+```bash
+sudo ~/rustdesk-drm/remove.sh
+```
+
+Then switch to the built image and reboot. RustDesk user settings are preserved.
+No system extension or local RPM layering is needed on the new image.
+Check the service with `systemctl status rustdesk-drm.service`.
+
 ## Per-machine setup after install
 
 **Wireshark capture without root:** add yourself to the `wireshark` group, then log out and back in:
