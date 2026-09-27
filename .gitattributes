@@ -1,0 +1,2 @@
+# Build scripts run inside Linux containers; keep them LF even on Windows checkouts
+* text=auto eol=lf

@@ -22,8 +22,20 @@ concurrency:
 
 jobs:
   build_push:
-    name: Build and push image
+    name: Build and push ${{ matrix.variant }} image
     runs-on: ubuntu-26.04
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Dell laptop - Intel, no dGPU
+          - variant: main
+            image_suffix: ""
+            base_image: ghcr.io/ublue-os/aurora-dx:stable
+          # Desktop - RTX 3090 (Ampere uses the open kernel modules)
+          - variant: nvidia
+            image_suffix: "-nvidia"
+            base_image: ghcr.io/ublue-os/aurora-dx-nvidia-open:stable
 
     permissions:
       contents: read
@@ -49,7 +61,7 @@ jobs:
       - name: Image Name
         id: image-name
         run: |
-          IMAGE_NAME=$(just image_name)
+          IMAGE_NAME="$(just image_name)${{ matrix.image_suffix }}"
 
           echo "IMAGE_NAME=${IMAGE_NAME}" >> $GITHUB_ENV
 
@@ -69,6 +81,9 @@ jobs:
       # This actually builds the container image
       - name: Build Image
         id: build-image
+        env:
+          BASE_IMAGE: ${{ matrix.base_image }}
+          IMAGE_VARIANT: ${{ matrix.variant }}
         run: |
           just build \
             ${IMAGE_NAME} \
