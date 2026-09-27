@@ -47,6 +47,14 @@ Check the service with `systemctl status rustdesk-drm.service`.
 
 ## Per-machine setup after install
 
+**NetBird:** both images include the daemon, desktop app, and its GTK/WebKit
+dependencies from the [official installation instructions](https://docs.netbird.io/get-started/install/linux).
+The `netbird.service` is enabled at boot. Open NetBird to enroll each machine,
+or run `sudo netbird up` (add `--management-url https://your-server` for a
+self-hosted deployment). Credentials and device identity are not baked into
+the image. NetBird updates arrive through image rebuilds; its RPM repository
+is disabled outside the build transaction.
+
 **Wireshark capture without root:** add yourself to the `wireshark` group, then log out and back in:
 
 ```bash

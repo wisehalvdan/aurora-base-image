@@ -1,0 +1,19 @@
+[Unit]
+Description=NetBird mesh network client
+Documentation=https://docs.netbird.io/
+Wants=network-online.target
+After=network-online.target NetworkManager.service
+
+[Service]
+Type=simple
+ExecStart=/usr/bin/netbird service run --log-file console
+Environment=SYSTEMD_UNIT=netbird
+Restart=on-failure
+RestartSec=5
+ConfigurationDirectory=netbird
+StateDirectory=netbird
+RuntimeDirectory=netbird
+LogsDirectory=netbird
+
+[Install]
+WantedBy=multi-user.target
