@@ -9,6 +9,28 @@ Personal Aurora DX images, built from one Containerfile:
 
 Shared changes go in `build_files/shared/`, per-machine changes in `build_files/variants/`, config files in `system_files/`.
 
+## Vicinae launcher
+
+Both images include Vicinae from the COPR listed in the
+[Linux installation guide](https://docs.vicinae.com/install/linux), plus Node.js
+for extensions. Updates arrive through image rebuilds; the COPR is disabled
+after installation.
+
+Following the [KDE setup guide](https://docs.vicinae.com/quickstart/kde), the
+`vicinae.service` user unit is enabled globally and starts with each Plasma
+session after booting the updated image. No separate KDE Autostart entry is
+needed. Check it with `systemctl --user status vicinae.service` and view logs
+with `journalctl --user -u vicinae.service`.
+
+In **System Settings → Keyboard → Shortcuts**, add a command shortcut for
+`vicinae toggle` and choose your preferred keys. For example, to use
+**Alt+Space**, first remove that binding from KRunner. Existing shortcuts are
+preserved by the image.
+
+Vicinae supports KDE Wayland blur directly. If its window does not receive
+focus, set **System Settings → Window Management → Window Behavior → Focus →
+Focus stealing prevention** to **Low**, as recommended upstream.
+
 ## RustDesk unattended Wayland access
 
 Both images include the latest upstream RustDesk unattended Wayland preview and
