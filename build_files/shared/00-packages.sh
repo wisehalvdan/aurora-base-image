@@ -4,6 +4,9 @@
 set -ouex pipefail
 
 dnf5 install -y \
-    tmux
+    tmux \
+    ripgrep \
+    fd-find \
+    tio
 
 systemctl enable podman.socket
