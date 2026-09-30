@@ -9,6 +9,34 @@ Personal Aurora DX images, built from one Containerfile:
 
 Shared changes go in `build_files/shared/`, per-machine changes in `build_files/variants/`, config files in `system_files/`.
 
+## Waydroid
+
+Both images include Waydroid from Fedora and
+[waydroid-helper](https://github.com/waydroid-helper/waydroid-helper) from its
+upstream COPR. Updates arrive through image rebuilds; the COPR is disabled
+after installation.
+
+After booting the updated image, launch **Waydroid** in a Plasma Wayland
+session and initialize Android using the
+[upstream OTA URLs](https://docs.waydro.id/usage/install-on-desktops):
+`https://ota.waydro.id/system` and `https://ota.waydro.id/vendor`.
+Then enable the container service:
+
+```bash
+sudo systemctl enable --now waydroid-container.service
+waydroid show-full-ui
+```
+
+Open **Waydroid Helper** to configure Android and install optional extensions
+such as ARM translation. Android images and app data are initialized per
+machine and persist across OS image updates.
+
+For the NVIDIA desktop, follow the
+[upstream software rendering instructions](https://docs.waydro.id/faq/get-waydroid-to-work-through-a-vm):
+add `ro.hardware.gralloc=default` and `ro.hardware.egl=swiftshader` under
+`[properties]` in `/var/lib/waydroid/waydroid.cfg`, then run
+`sudo waydroid upgrade -o`. Software rendering is slower than GPU acceleration.
+
 ## Vicinae launcher
 
 Both images include Vicinae from the COPR listed in the
