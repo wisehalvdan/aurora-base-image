@@ -9,6 +9,26 @@ Personal Aurora DX images, built from one Containerfile:
 
 Shared changes go in `build_files/shared/`, per-machine changes in `build_files/variants/`, config files in `system_files/`.
 
+## Rex server
+
+Both images include the Rex server and CLI from the signed upstream `preview`
+RPM repository. Updates arrive through image rebuilds; the repository is disabled
+outside the build transaction. No local RPM layering is needed.
+
+After booting the updated image, run these commands as your normal user, without
+sudo, following the [upstream quickstart](https://www.superlogical.com/rex/docs/linux/installation):
+
+```bash
+rex server install
+rex server status
+```
+
+This sets up your personal server to start at boot and stay running while you
+are logged out. With SSH access configured, check it from your client with
+`ssh your-user@your-machine rex version`, then add
+`ssh://your-user@your-machine` as a remote host in Rex. Personal servers run as
+your own account; the shared and login server services are left disabled.
+
 ## Waydroid
 
 Both images include Waydroid from Fedora and
