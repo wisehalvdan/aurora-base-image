@@ -19,6 +19,10 @@ IsRuntime=false
 Branch=stable
 IsRuntime=false
 
+[Flatpak Preinstall io.github.streetpea.Chiaki4deck]
+Branch=stable
+IsRuntime=false
+
 [Flatpak Preinstall io.dbeaver.DBeaverCommunity]
 Branch=stable
 IsRuntime=false

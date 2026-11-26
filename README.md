@@ -9,6 +9,32 @@ Personal Aurora DX images, built from one Containerfile:
 
 Shared changes go in `build_files/shared/`, per-machine changes in `build_files/variants/`, config files in `system_files/`.
 
+## GameSir G7 Pro 8K and Chiaki-ng
+
+Both images preinstall Chiaki-ng from Flathub on startup. Open it from the
+application launcher to register your PlayStation.
+[Flathub](https://flathub.org/apps/io.github.streetpea.Chiaki4deck) ·
+[Console registration guide](https://chiaki-ng.github.io/chiaki-ng/setup/configuration/#registering-your-playstation)
+
+Connect the G7 Pro 8K over USB or with its 2.4 GHz receiver. Use XInput mode.
+If you need to switch modes, hold **View + Menu** for two seconds. Aurora ships
+the `xpad` kernel driver for XInput. The image includes a USB quirk for wired
+units that identify as `3537:1034` and immediately drop out of XInput mode.
+[GameSir manual](https://gamesir.com/support/manuals/gamesir-g7-pro-aimlabs-edition) ·
+[USB workaround](https://github.com/broroeror/gamesir-linux-tools/issues/44)
+
+Both images include **Deadband**, an open-source Linux app for configuring
+GameSir controllers. With the G7 Pro 8K in XInput mode, open Deadband from the
+application launcher to adjust button assignments, sticks, triggers, lighting,
+and polling rate where supported by your controller. The included udev rule
+grants device access to the logged-in desktop user. Run `deadband --doctor` to
+check detection and permissions.
+[Deadband documentation](https://github.com/broroeror/gamesir-linux-tools/tree/v0.7.0)
+
+In Chiaki-ng, use **Settings → Controllers → Change Controller Mapping** to map
+PlayStation controls such as the touchpad click to the GameSir.
+[Chiaki-ng controller guide](https://chiaki-ng.github.io/chiaki-ng/setup/controlling/#using-a-non-playstation-controller-with-chiaki-ng)
+
 ## Rex server
 
 Both images include the Rex server and CLI from the signed upstream `preview`
