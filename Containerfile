@@ -25,7 +25,7 @@ RUN rm /opt && mkdir /opt
 ## Shared changes live in build_files/shared/*.sh, per-variant changes in
 ## build_files/variants/<IMAGE_VARIANT>.sh. build.sh runs them in order.
 
-# just build changes this value each run so remote nightly updates bypass cache.
+# just build changes this value each run to pick up remote package updates.
 ARG IMAGE_BUILD_NONCE=manual
 RUN --mount=type=bind,from=ctx,source=/,target=/ctx \
     --mount=type=cache,dst=/var/cache \
